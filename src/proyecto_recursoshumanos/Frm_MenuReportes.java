@@ -135,7 +135,7 @@ private void initCustomCardDesign() {
         // 1. Docentes - Azul marino
         JButton cardDocentes = crearCardGradiente("Listar Docentes", FontAwesomeSolid.CHALKBOARD_TEACHER,
                 new Color(20, 50, 120), new Color(45, 110, 190));
-        cardDocentes.addActionListener(e -> new Frm_Reporte_Docentes().setVisible(true));
+        //cardDocentes.addActionListener(e -> new Frm_Reporte_Docentes().setVisible(true));
         getContentPane().add(cardDocentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 290, 100));
 
         // 2. Cargas académicas - Teal
@@ -148,13 +148,13 @@ private void initCustomCardDesign() {
         // 3. Planes de estudio - Índigo / violeta
         JButton cardPlanes = crearCardGradiente("Planes de Estudio", FontAwesomeSolid.BOOK_OPEN,
                 new Color(65, 40, 130), new Color(110, 80, 190));
-        cardPlanes.addActionListener(e -> new Frm_PlanEstudios().setVisible(true));
+        //cardPlanes.addActionListener(e -> new Frm_PlanEstudios().setVisible(true));
         getContentPane().add(cardPlanes, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 215, 290, 100));
 
         // 4. Pagos - Ámbar / cobre
         JButton cardPagos = crearCardGradiente("Reporte de Pagos", FontAwesomeSolid.FILE_INVOICE_DOLLAR,
                 new Color(190, 90, 20), new Color(235, 150, 45));
-        cardPagos.addActionListener(e -> new Frm_Reporte_Clientes().setVisible(true));
+        //cardPagos.addActionListener(e -> new Frm_Reporte_Clientes().setVisible(true));
         getContentPane().add(cardPagos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 215, 290, 100));
 
         // 5. Horarios - Azul cielo (centrada)

@@ -90,27 +90,27 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-        public static void main(String args[]) {
-            /* Set the Nimbus look and feel */
-            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-             */
-            try {
-                for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                    if ("Nimbus".equals(info.getName())) {
-                        javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                        break;
-                    }
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
                 }
-            } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-                logger.log(java.util.logging.Level.SEVERE, null, ex);
             }
-            //</editor-fold>
-
-            /* Create and display the form */
-            java.awt.EventQueue.invokeLater(() -> new Frm_Menu_Principal().setVisible(true));
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new Frm_Menu_Principal().setVisible(true));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelHeader;
@@ -305,24 +305,56 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
     // 6.4 Abre el formulario que corresponde al módulo (agrega aquí los demás cuando existan)
     private void abrirModulo(String nombre) {
         switch (nombre) {
+
             case "Inicio":
-                break;                                   // ya estás en el inicio
+                armarContenido();
+                break;
+
+            case "Personal":
+                mostrarPanel(new Frm_Personal());
+                break;
+
             case "Empleados":
                 new frm_Mantempleado().setVisible(true);
                 break;
+
             case "Departamentos":
                 new frm_departamento_academico().setVisible(true);
                 break;
+
+            case "Puestos":
+                mostrarPanel(new Frm_Puestos());
+                break;
+
             case "Asistencias":
                 new frm_Mantasistencia().setVisible(true);
                 break;
+
+            case "Planillas":
+                mostrarPlanillas();
+                break;
+
             case "Capacitaciones":
                 new frm_capacitacion().setVisible(true);
                 break;
+
+            // case "Evaluaciones":
+            //  mostrarEvaluaciones();
+            //  break;
+            //case "Reportes":
+            //new Frm_Menu_Reportes().setVisible(true);
+            //break;
+            case "Configuración":
+                mostrarPanel(new Frm_Configuracion());
+                break;
+
             default:
-                // Personal, Puestos, Planillas, Evaluaciones, Reportes, Configuración
-                JOptionPane.showMessageDialog(this, "El módulo \"" + nombre + "\" aún está en construcción.",
-                        "Próximamente", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Opción no reconocida: " + nombre,
+                        "Aviso",
+                        JOptionPane.WARNING_MESSAGE
+                );
                 break;
         }
     }
@@ -1079,6 +1111,7 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
     }
 
     private class GraficoDona extends JPanel {
+
         private final int[] valores = {12, 9, 8, 6, 6, 7};
         private final Color[] colores = {new Color(37, 99, 235), new Color(22, 163, 74),
             new Color(249, 115, 22), new Color(124, 58, 237),
@@ -1099,7 +1132,9 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
             int x = (getWidth() - tam) / 2;
             int y = (getHeight() - tam) / 2;
             int total = 0;
-            for (int v : valores) total += v;
+            for (int v : valores) {
+                total += v;
+            }
             int inicio = 90;
             for (int i = 0; i < valores.length; i++) {
                 int angulo = (int) Math.round(valores[i] * 360.0 / total);
@@ -1122,6 +1157,7 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
     }
 
     private class GraficoBarras extends JPanel {
+
         private final String[] etiquetas = {"Operario", "Técnico", "Analista", "Asistente", "Supervisor", "Otros"};
         private final int[] valores = {12, 10, 8, 6, 5, 7};
 
@@ -1177,11 +1213,11 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
         fila.setOpaque(false);
         fila.setPreferredSize(new Dimension(0, 124));
 
-        fila.add(crearTarjetaEstadistica("Total Docentes", "48", "5%",
+        fila.add(crearTarjetaEstadistica("Total Empleados", "48", "5%",
                 "Docentes registrados en el sistema",
                 FontAwesomeSolid.USERS, new Color(37, 99, 235)));
         fila.add(crearTarjetaEstadistica("Facultades", "6", "0%",
-                "Total de facultades",
+                "Total Departamentos",
                 FontAwesomeSolid.UNIVERSITY, new Color(22, 163, 74)));
         fila.add(crearTarjetaEstadistica("Escuelas Prof.", "12", "9%",
                 "Total de escuelas profesionales",
@@ -1254,7 +1290,7 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
         private boolean hover = false;
 
         BotonAcceso(String texto, FontAwesomeSolid tipoIcono,
-                    Color color, Runnable accion) {
+                Color color, Runnable accion) {
             this.colorIcono = color;
             this.icono = FontIcon.of(tipoIcono, 22, color);
 
@@ -1305,11 +1341,13 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
                         accion.run();
                     }
                 }
+
                 @Override
                 public void mouseEntered(MouseEvent e) {
                     hover = true;
                     repaint();
                 }
+
                 @Override
                 public void mouseExited(MouseEvent e) {
                     hover = false;
@@ -1404,5 +1442,37 @@ public class Frm_Menu_Principal extends javax.swing.JFrame {
                     (getHeight() - icono.getIconHeight()) / 2);
             g2.dispose();
         }
+    }
+
+    private void mostrarPlanillas() {
+        panelContenido.removeAll();
+        panelContenido.setLayout(new BorderLayout());
+        panelContenido.add(new Frm_Planillas(), BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }
+
+    private void mostrarPanel(JPanel panel) {
+        panelContenido.removeAll();                 // cambia por el nombre de tu panel de contenido
+        panelContenido.setLayout(new BorderLayout());
+        panelContenido.add(panel, BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }
+
+    private void mostrarPuestos() {
+        panelContenido.removeAll();
+        panelContenido.setLayout(new BorderLayout());
+        panelContenido.add(new Frm_Puestos(), BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
+    }
+
+    private void mostrarConfiguracion() {
+        panelContenido.removeAll();
+        panelContenido.setLayout(new BorderLayout());
+        panelContenido.add(new Frm_Configuracion(), BorderLayout.CENTER);
+        panelContenido.revalidate();
+        panelContenido.repaint();
     }
 }
